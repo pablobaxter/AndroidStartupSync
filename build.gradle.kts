@@ -16,6 +16,17 @@ dependencies {
     }
 }
 
+intellijPlatform {
+    publishing {
+        token = providers.gradleProperty("intellijPlatformPublishingToken")
+        channels = listOf("alpha")
+    }
+    signing {
+        certificateChain.set(providers.gradleProperty("certChain"))
+        privateKey.set(providers.gradleProperty("privateKey"))
+    }
+}
+
 tasks {
     withType<RunIdeTask> {
         jvmArgumentProviders += CommandLineArgumentProvider {
@@ -35,15 +46,5 @@ tasks {
     patchPluginXml {
         sinceBuild.set("241")
         untilBuild.set("243.*")
-    }
-
-    signPlugin {
-        certificateChain.set(System.getenv("CERTIFICATE_CHAIN"))
-        privateKey.set(System.getenv("PRIVATE_KEY"))
-        password.set(System.getenv("PRIVATE_KEY_PASSWORD"))
-    }
-
-    publishPlugin {
-        token.set(System.getenv("PUBLISH_TOKEN"))
     }
 }

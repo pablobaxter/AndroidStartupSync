@@ -1,0 +1,53 @@
+name: Publish a release
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - '*'
+
+concurrency:
+  group: "release"
+  cancel-in-progress: false
+
+jobs:
+  publish_archives:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v3
+        with:
+          lfs: true
+      # https://github.com/gradle/gradle-build-action/issues/561
+      - name: Create Gradle files
+        run: |
+          cd ~
+          mkdir -p .gradle/ && touch .gradle/gradle.properties
+      - name: Set up Java
+        id: setup-java
+        uses: actions/setup-java@v3.11.0
+        with:
+          distribution: 'zulu'
+          java-version: 17
+      - name: Setup Gradle Java installations paths
+        run: |
+          cd ~/.gradle
+          echo "org.gradle.java.installations.paths=${{ steps.setup-java.outputs.path }}" >> gradle.properties
+      - name: Setup gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-home-cache-cleanup: true
+
+      - name: Publish
+        env:
+          ORG_GRADLE_PROJECT_certChain: ${{ secrets.CERTIFICATE_CHAIN }}
+          ORG_GRADLE_PROJECT_privateKey: ${{ secrets.PRIVATE_KEY }}
+          ORG_GRADLE_PROJECT_intellijPlatformPublishingToken: ${{ secrets.JETBRAINS_PLUGIN_TOKEN }}
+        run: ./gradlew publishPlugin --stacktrace
+
+env:
+  GRADLE_OPTS: -Dorg.gradle.parallel=true -Dorg.gradle.caching=true
