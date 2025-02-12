@@ -1,7 +1,7 @@
-package com.frybits.androidstartupdisable
+package com.frybits.android.startup.sync
 
 import com.android.tools.idea.gradle.project.GradleProjectInfo
-import com.frybits.androidstartupdisable.DisableAndroidSyncBundle.message
+import com.frybits.android.startup.sync.AndroidStartupSyncBundle.message
 import com.intellij.ide.util.PropertiesComponent
 import com.intellij.openapi.options.BoundSearchableConfigurable
 import com.intellij.openapi.project.Project
@@ -9,8 +9,8 @@ import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.dsl.builder.bindSelected
 import com.intellij.ui.dsl.builder.panel
 
-class DisableAndroidSyncStartupSetting(private val project: Project) : BoundSearchableConfigurable(
-    message("frybits.disable.sync.name"),
+class AndroidStartupSyncSetting(private val project: Project) : BoundSearchableConfigurable(
+    message("frybits.android.startup.sync.name"),
     "Settings_Build_Tools",
     "build.tools"
 ) {
@@ -22,7 +22,7 @@ class DisableAndroidSyncStartupSetting(private val project: Project) : BoundSear
         var isStartupSyncDisabled = propertiesComponent.getBoolean(DISABLE_STARTUP_SYNC)
 
         row {
-            checkBox(message("frybits.disable.sync.radio.button.title"))
+            checkBox(message("frybits.android.startup.sync.radio.button.title"))
                 .bindSelected({ isStartupSyncDisabled }, { isStartupSyncDisabled = it })
         }
         onApply {

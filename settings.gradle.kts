@@ -24,4 +24,4 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "AndroidStartupDisable"
+rootProject.name = "AndroidStartupSync"

@@ -1,11 +1,11 @@
-package com.frybits.androidstartupdisable
+package com.frybits.android.startup.sync
 
 import com.android.tools.idea.gradle.project.GradleProjectInfo
 import com.intellij.ide.util.PropertiesComponent
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.startup.ProjectActivity
 
-class DisableAndroidSyncStartupActivity: ProjectActivity {
+class AndroidStartupSyncActivity: ProjectActivity {
     override suspend fun execute(project: Project) {
         val gradleProjectInfo = GradleProjectInfo.getInstance(project)
         val propertiesComponent = PropertiesComponent.getInstance(project)

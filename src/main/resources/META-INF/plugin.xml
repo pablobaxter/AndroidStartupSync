@@ -1,11 +1,11 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
-    <id>com.frybits.AndroidStartupDisable</id>
+    <id>com.frybits.android.startup.sync</id>
 
     <!-- Public plugin name should be written in Title Case.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
-    <name>Android Startup Disable</name>
+    <name>Android Startup Sync</name>
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
     <vendor email="pablo@frybits.com" url="https://www.frybits.com">Frybits</vendor>
@@ -13,7 +13,7 @@
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
-    <description>Small plugin that disables Android Studio auto-import feature</description>
+    <description>Small plugin that disables Android Studio sync on project loads.</description>
 
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
@@ -23,12 +23,13 @@
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
-        <postStartupActivity implementation="com.frybits.androidstartupdisable.DisableAndroidSyncStartupActivity"
+        <postStartupActivity implementation="com.frybits.android.startup.sync.AndroidStartupSyncActivity"
                              order="first"/>
-        <projectConfigurable instance="com.frybits.androidstartupdisable.DisableAndroidSyncStartupSetting"
+        <projectConfigurable instance="com.frybits.android.startup.sync.AndroidStartupSyncSetting"
                              parentId="build.tools"
-                             id="com.frybits.androidstartupdisable.disable.sync"
-                             key="frybits.disable.sync.name"
-                             bundle="messages.DisableAndroidSync"/>
+                             id="com.frybits.android.startup.sync.disable"
+                             key="frybits.android.startup.sync.name"
+                             bundle="messages.AndroidStartupSync"/>
+        <supportsKotlinPluginMode supportsK2="true" />
     </extensions>
 </idea-plugin>

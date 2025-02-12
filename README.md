@@ -1,4 +1,4 @@
-# Disable Android Sync IDE Plugin
+# Android Startup Sync IDE Plugin
 
 This IDE plugin allows disabling the Android Sync on project load. This is mostly in response to the Google issue [b/299322773](https://issuetracker.google.com/issues/299322773).
 
@@ -18,4 +18,4 @@ To build and test this plugin, you can run the following gradle command:
 With this command, an instance of Android Studio should start, with the setting disabled.
 
 ## Status
-This project is still under developement, and contributions are welcome.
+This project is still under development, and contributions are welcome.

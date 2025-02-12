@@ -1,3 +1,5 @@
+import org.jetbrains.intellij.platform.gradle.tasks.RunIdeTask
+
 plugins {
     id("java")
     id("org.jetbrains.kotlin.jvm") version "2.0.21"
@@ -9,12 +11,18 @@ version = "1.0-SNAPSHOT"
 
 dependencies {
     intellijPlatform {
-        androidStudio("2024.1.1.12")
-        bundledPlugin("org.jetbrains.android")
+        androidStudio("2024.1.1.3")
+        plugin("org.jetbrains.android:241.14494.240")
     }
 }
 
 tasks {
+    withType<RunIdeTask> {
+        jvmArgumentProviders += CommandLineArgumentProvider {
+            listOf("-Didea.kotlin.plugin.use.k2=true")
+        }
+    }
+
     // Set the JVM compatibility versions
     withType<JavaCompile> {
         sourceCompatibility = "17"
