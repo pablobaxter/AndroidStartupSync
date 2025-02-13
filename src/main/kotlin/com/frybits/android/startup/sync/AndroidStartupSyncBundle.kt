@@ -23,6 +23,9 @@ import java.util.function.Supplier
 private const val PATH_TO_BUNDLE = "messages.AndroidStartupSync"
 internal const val DISABLE_STARTUP_SYNC = "frybits.disable.startup.sync"
 
+/*
+ * Allows access to custom bundle properties
+ */
 object AndroidStartupSyncBundle : DynamicBundle(PATH_TO_BUNDLE) {
 
     fun message(@PropertyKey(resourceBundle = PATH_TO_BUNDLE) key: String, vararg params: Any): String {

@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.frybits"
-version = "1.0-SNAPSHOT"
+version = "1.1-SNAPSHOT"
 
 dependencies {
     intellijPlatform {

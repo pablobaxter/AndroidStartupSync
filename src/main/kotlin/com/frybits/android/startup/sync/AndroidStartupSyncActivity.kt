@@ -21,13 +21,19 @@ import com.intellij.ide.util.PropertiesComponent
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.startup.ProjectActivity
 
+/*
+ * Sets the previously set flags on Android Studio start in order to prevent Gradle project loading
+ */
 class AndroidStartupSyncActivity: ProjectActivity {
     override suspend fun execute(project: Project) {
         val gradleProjectInfo = GradleProjectInfo.getInstance(project)
         val propertiesComponent = PropertiesComponent.getInstance(project)
 
-        var isStartupSyncDisabled = propertiesComponent.getBoolean(DISABLE_STARTUP_SYNC)
+        // If the value was never set, default to what GradleProjectInfo already uses
         if (propertiesComponent.isValueSet(DISABLE_STARTUP_SYNC)) {
+
+            // Grab previously set property, and set it before Android Studio completes startup
+            var isStartupSyncDisabled = propertiesComponent.getBoolean(DISABLE_STARTUP_SYNC)
             gradleProjectInfo.isNewProject = !isStartupSyncDisabled
             gradleProjectInfo.isSkipStartupActivity = isStartupSyncDisabled
         }
