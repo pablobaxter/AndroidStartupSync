@@ -30,7 +30,7 @@ intellijPlatform {
 tasks {
     withType<RunIdeTask> {
         jvmArgumentProviders += CommandLineArgumentProvider {
-            listOf("-Didea.kotlin.plugin.use.k2=true")
+            listOf("")
         }
     }
 
