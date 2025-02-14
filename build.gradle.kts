@@ -12,7 +12,8 @@ version = "1.1-SNAPSHOT"
 dependencies {
     intellijPlatform {
         androidStudio("2024.1.1.3")
-        plugin("org.jetbrains.android:241.14494.240")
+        bundledPlugin("org.jetbrains.android")
+        bundledPlugin("com.android.tools.design")
     }
 }
 
@@ -28,12 +29,6 @@ intellijPlatform {
 }
 
 tasks {
-    withType<RunIdeTask> {
-        jvmArgumentProviders += CommandLineArgumentProvider {
-            listOf("")
-        }
-    }
-
     // Set the JVM compatibility versions
     withType<JavaCompile> {
         sourceCompatibility = "17"
