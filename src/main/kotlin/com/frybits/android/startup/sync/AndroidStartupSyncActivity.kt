@@ -45,6 +45,8 @@ class AndroidStartupSyncActivity : ProjectActivity {
             var isStartupSyncDisabled = propertiesComponent.getBoolean(DISABLE_STARTUP_SYNC)
             gradleProjectInfo.isNewProject = !isStartupSyncDisabled
             gradleProjectInfo.isSkipStartupActivity = isStartupSyncDisabled
+
+            // Notify that startup sync was disabled if sync was needed
             if (isStartupSyncDisabled && gradleSyncStateHolder.isSyncNeeded().isAtLeast(ThreeState.UNSURE)) {
                 val notification = NotificationGroupManager.getInstance()
                     .getNotificationGroup("frybits.android.startup.sync.notification")
@@ -52,12 +54,13 @@ class AndroidStartupSyncActivity : ProjectActivity {
                         message("frybits.android.startup.sync.notification.title"),
                         NotificationType.INFORMATION
                     )
-                notification.addAction(object : SyncProjectAction() {
-                    override fun doPerform(e: AnActionEvent, project: Project) {
-                        super.doPerform(e, project)
-                        notification.expire()
-                    }
-                })
+                notification.addAction(
+                    object : SyncProjectAction(message("frybits.android.startup.sync.notification.action")) {
+                        override fun doPerform(e: AnActionEvent, project: Project) {
+                            super.doPerform(e, project)
+                            notification.expire()
+                        }
+                    })
 
                 notification
                     .notify(project)
