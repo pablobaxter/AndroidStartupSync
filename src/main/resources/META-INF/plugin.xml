@@ -30,6 +30,9 @@
                              id="com.frybits.android.startup.sync.disable"
                              key="frybits.android.startup.sync.name"
                              bundle="messages.AndroidStartupSync"/>
-        <supportsKotlinPluginMode supportsK2="true" />
+
+        <notificationGroup id="frybits.android.startup.sync.notification"
+                           displayType="BALLOON"/>
+        <supportsKotlinPluginMode supportsK2="true"/>
     </extensions>
 </idea-plugin>

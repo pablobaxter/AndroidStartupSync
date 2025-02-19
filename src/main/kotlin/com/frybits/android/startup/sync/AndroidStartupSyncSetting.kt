@@ -25,6 +25,9 @@ import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.dsl.builder.bindSelected
 import com.intellij.ui.dsl.builder.panel
 
+/*
+ * Adds the UI to the IntelliJ settings panel allowing per project enable/disable of startup sync
+ */
 class AndroidStartupSyncSetting(private val project: Project) : BoundSearchableConfigurable(
     message("frybits.android.startup.sync.name"),
     "Settings_Build_Tools",
